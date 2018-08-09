@@ -1,20 +1,64 @@
 import * as React from 'react';
-import './App.css';
+import AddCompany from './containers/AddCompany';
+import AddEmployee from './containers/AddEmployee';
+import Companies from './containers/Companies';
+import Company from './containers/Company';
+import EditCompany from './containers/EditCompany';
+import EditEmployee from './containers/EditEmployee';
+import Employee from './containers/Employee';
+import Employees from './containers/Employees';
+import Grid from '@material-ui/core/Grid';
+import Nav from './components/Nav';
+import seedData from './seedData';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+  } from 'react-router-dom';
 
-import logo from './logo.svg';
+if (process.env.REACT_APP_MODE === "demo") {
+  seedData();
+}
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <React.Fragment>
+          <Nav />
+          <Grid container>
+            <Grid item xs={12}>
+              <Switch>
+                <Route
+                  path="/companies/:companyId/employees/:employeeId/edit"
+                  component={EditEmployee}
+                />
+                <Route
+                  path="/companies/:companyId/employees/add"
+                  component={AddEmployee}
+                />
+                <Route
+                  path="/companies/:companyId/employees/:employeeId"
+                  component={Employee}
+                />
+                <Route
+                  path="/companies/:companyId/employees"
+                  component={Employees}
+                />
+                <Route
+                  path="/companies/:companyId/edit"
+                  component={EditCompany}
+                />
+                <Route path="/companies/add" component={AddCompany} />
+                <Route path="/companies/:companyId" component={Company} />
+                <Route path="/companies" component={Companies} />
+                <Redirect from="/" to="/companies" />
+              </Switch>
+            </Grid>
+          </Grid>
+        </React.Fragment>
+      </Router>
     );
   }
 }
