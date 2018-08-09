@@ -1,6 +1,10 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Companies from '../components/Companies';
 
-const Companies: React.SFC = () => <Typography>Companies</Typography>;
+class CompaniesContainer extends React.Component {
+  render() {
+    return <Companies />;
+  }
+}
 
-export default Companies;
+export default CompaniesContainer;

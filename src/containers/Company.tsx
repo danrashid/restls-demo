@@ -1,6 +1,20 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Company from '../components/Company';
 
-const Company: React.SFC = () => <Typography>Company</Typography>;
+type OwnProps = {
+  match: {
+    params: {
+      companyId: string;
+    };
+  };
+};
 
-export default Company;
+type Props = OwnProps;
+
+class CompanyContainer extends React.Component<Props> {
+  render() {
+    return <Company />;
+  }
+}
+
+export default CompanyContainer;

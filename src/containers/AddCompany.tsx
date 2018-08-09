@@ -1,6 +1,17 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import CompanyForm from '../components/CompanyForm';
+import { History } from 'history';
 
-const AddCompany: React.SFC = () => <Typography>AddCompany</Typography>;
+type OwnProps = {
+  history: History;
+};
+
+type Props = OwnProps;
+
+class AddCompany extends React.Component<Props> {
+  render() {
+    return <CompanyForm />;
+  }
+}
 
 export default AddCompany;

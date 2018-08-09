@@ -1,6 +1,23 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import EmployeeForm from '../components/EmployeeForm';
+import { History } from 'history';
 
-const EditEmployee: React.SFC = () => <Typography>EditEmployee</Typography>;
+type OwnProps = {
+  history: History;
+  match: {
+    params: {
+      companyId: string;
+      employeeId: string;
+    };
+  };
+};
+
+type Props = OwnProps;
+
+class EditEmployee extends React.Component<Props> {
+  render() {
+    return <EmployeeForm />;
+  }
+}
 
 export default EditEmployee;
