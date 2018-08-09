@@ -20,7 +20,7 @@ export default () => {
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         createdDateTime: now,
         updatedDateTime: now,
-        isArchived: faker.random.arrayElement([true, false])
+        isArchived: faker.random.boolean()
       });
     }
 
@@ -33,7 +33,8 @@ export default () => {
         phone: faker.phone.phoneNumber(),
         createdDateTime: now,
         updatedDateTime: now,
-        isArchived: faker.random.arrayElement([true, false])
+        isArchived: faker.random.boolean(),
+        numEmployees: 0
       });
     }
 
@@ -44,6 +45,7 @@ export default () => {
         !employees.some(e => e.userId === userId && e.companyId === companyId)
       ) {
         const now = Date.now();
+        const isArchived = faker.random.boolean();
         employees.push({
           id: faker.random.uuid(),
           userId,
@@ -51,11 +53,17 @@ export default () => {
           phone: faker.phone.phoneNumber(),
           emailAddress: faker.internet.email(),
           jobTitle: faker.name.jobTitle(),
-          isAdmin: faker.random.arrayElement([true, false]),
+          isAdmin: faker.random.boolean(),
           createdDateTime: now,
           updatedDateTime: now,
-          isArchived: faker.random.arrayElement([true, false])
+          isArchived
         });
+        if (!isArchived) {
+          const company = companies.find(({ id }) => id === companyId);
+          if (company) {
+            company.numEmployees += 1;
+          }
+        }
       }
     }
 

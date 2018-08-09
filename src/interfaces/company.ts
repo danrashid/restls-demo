@@ -1,9 +1,10 @@
 export interface ICompany {
-  id: string;
-  name: string;
-  address: string;
-  phone: string;
-  createdDateTime: number;
-  updatedDateTime: number;
-  isArchived: boolean;
+  readonly id: string;
+  readonly name: string;
+  readonly address: string;
+  readonly phone: string;
+  readonly createdDateTime: number;
+  readonly updatedDateTime: number;
+  readonly isArchived: boolean;
+  numEmployees: number;
 }

@@ -1,8 +1,8 @@
 export interface IUser {
-  id: string;
-  emailAddress: string;
-  name: string;
-  createdDateTime: number;
-  updatedDateTime: number;
-  isArchived: boolean;
+  readonly id: string;
+  readonly emailAddress: string;
+  readonly name: string;
+  readonly createdDateTime: number;
+  readonly updatedDateTime: number;
+  readonly isArchived: boolean;
 }

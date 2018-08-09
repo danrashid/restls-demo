@@ -1,12 +1,12 @@
 export interface IEmployee {
-  id: string;
-  userId: string;
-  companyId: string;
-  phone: string;
-  emailAddress: string;
-  jobTitle: string;
-  isAdmin: boolean;
-  createdDateTime: number;
-  updatedDateTime: number;
-  isArchived: boolean;
+  readonly id: string;
+  readonly userId: string;
+  readonly companyId: string;
+  readonly phone: string;
+  readonly emailAddress: string;
+  readonly jobTitle: string;
+  readonly isAdmin: boolean;
+  readonly createdDateTime: number;
+  readonly updatedDateTime: number;
+  readonly isArchived: boolean;
 }
