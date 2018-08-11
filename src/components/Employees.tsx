@@ -1,6 +1,10 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import { IEmployee } from '../interfaces/employee';
 
-const Employees: React.SFC = () => <Typography>Employees</Typography>;
+const Employees: React.SFC<{ employees: IEmployee[] }> = ({ employees }) => (
+  <div>
+    <pre>{JSON.stringify(employees, undefined, "  ")}</pre>
+  </div>
+);
 
 export default Employees;

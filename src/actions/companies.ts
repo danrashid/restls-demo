@@ -18,9 +18,8 @@ const fetchCompaniesFailure = (error: AxiosError) => ({
   error
 });
 
-const shouldFetchCompanies = ({
-  companies: { isFetching, companies }
-}: RootState) => !isFetching && !companies;
+const shouldFetchCompanies = ({ companies: { isFetching } }: RootState) =>
+  !isFetching;
 
 const fetchCompanies = (): ThunkAction<
   void,
@@ -31,7 +30,9 @@ const fetchCompanies = (): ThunkAction<
   try {
     dispatch(fetchCompaniesRequest());
 
-    const response = await axios.get<ICompany[]>(`/api/companies`);
+    const response = await axios.get<ICompany[]>(
+      "/api/companies?isArchived=false"
+    );
 
     dispatch(fetchCompaniesSuccess(response.data));
   } catch (error) {
