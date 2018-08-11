@@ -1,4 +1,6 @@
-export interface IEmployee {
+import { IUser } from './user';
+
+export interface IEmployeePayload {
   readonly id: string;
   readonly userId: string;
   readonly companyId: string;
@@ -9,4 +11,8 @@ export interface IEmployee {
   readonly created: number;
   readonly updated: number;
   readonly isArchived: boolean;
+}
+
+export interface IEmployee extends IEmployeePayload {
+  readonly user: IUser;
 }

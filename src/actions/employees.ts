@@ -1,6 +1,7 @@
 import * as types from '../reducers/employees';
 import axios, { AxiosError } from 'axios';
-import { IEmployee } from '../interfaces/employee';
+import { IEmployee, IEmployeePayload } from '../interfaces/employee';
+import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
 
@@ -27,11 +28,24 @@ const fetchEmployees = (
   try {
     dispatch(fetchEmployeesRequest());
 
-    const response = await axios.get<IEmployee[]>(
+    const employees = await axios.get<IEmployeePayload[]>(
       `/api/employees?companyId=${companyId}&isArchived=false`
     );
+    const users = await axios.all(
+      employees.data.map(({ userId }) =>
+        axios.get<IUser>(`/api/users/${userId}`)
+      )
+    );
+    console.log(users);
 
-    dispatch(fetchEmployeesSuccess(response.data));
+    dispatch(
+      fetchEmployeesSuccess(
+        employees.data.map((e, i) => ({
+          ...e,
+          user: users[i].data
+        }))
+      )
+    );
   } catch (error) {
     dispatch(fetchEmployeesFailure(error));
   }

@@ -38,9 +38,16 @@ class EmployeesContainer extends React.Component<Props> {
   }
 
   render() {
-    const { employees, isFetching, error } = this.props;
+    const {
+      employees,
+      isFetching,
+      error,
+      match: {
+        params: { companyId }
+      }
+    } = this.props;
     return employees && !isFetching ? (
-      <Employees employees={employees} />
+      <Employees employees={employees} companyId={companyId} />
     ) : error ? (
       <Error />
     ) : (

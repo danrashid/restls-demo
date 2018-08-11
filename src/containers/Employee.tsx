@@ -1,21 +1,55 @@
 import * as React from 'react';
 import Employee from '../components/Employee';
+import Error from '../components/Error';
+import Spinner from '../components/Spinner';
+import { Action, fetchEmployeeIfNeeded } from '../actions/employee';
+import { connect } from 'react-redux';
+import { RootState } from '../reducers';
+import { ThunkDispatch } from 'redux-thunk';
 
 type OwnProps = {
   match: {
     params: {
-      companyId: string;
       employeeId: string;
     };
   };
 };
 
-type Props = OwnProps;
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> &
+  OwnProps;
+
+const mapStateToProps = (state: RootState) => state.employee;
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, null, Action>,
+  {
+    match: {
+      params: { employeeId }
+    }
+  }: OwnProps
+) => ({
+  fetchEmployeeIfNeeded: () => dispatch(fetchEmployeeIfNeeded(employeeId))
+});
 
 class EmployeeContainer extends React.Component<Props> {
+  componentDidMount() {
+    this.props.fetchEmployeeIfNeeded();
+  }
+
   render() {
-    return <Employee />;
+    const { employee, isFetching, error } = this.props;
+    return employee && !isFetching ? (
+      <Employee employee={employee} />
+    ) : error ? (
+      <Error />
+    ) : (
+      <Spinner />
+    );
   }
 }
 
-export default EmployeeContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeContainer);
