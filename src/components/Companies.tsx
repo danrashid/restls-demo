@@ -7,6 +7,11 @@ const Companies: React.SFC<{ companies: ICompany[] }> = ({ companies }) => (
   <div>
     <Typography>Companies</Typography>
     <ul>
+      <li>
+        <Link to="/companies/add">Add a Company</Link>
+      </li>
+    </ul>
+    <ul>
       {companies.map(({ id, name }) => (
         <li key={id}>
           <Link to={`/companies/${id}`}>{name}</Link>

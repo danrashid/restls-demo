@@ -6,6 +6,9 @@ const Company: React.SFC<{ company: ICompany }> = ({ company }) => (
   <div>
     <pre>{JSON.stringify(company, undefined, "  ")}</pre>
     <p>
+      <Link to={`/companies/${company.id}/edit`}>Edit</Link>
+    </p>
+    <p>
       <Link to={`/companies/${company.id}/employees`}>Employees</Link>
     </p>
   </div>

@@ -36,7 +36,6 @@ const fetchEmployees = (
         axios.get<IUser>(`/api/users/${userId}`)
       )
     );
-    console.log(users);
 
     dispatch(
       fetchEmployeesSuccess(
