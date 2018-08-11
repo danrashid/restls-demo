@@ -8,12 +8,12 @@ module.exports = () => {
   for (let i = 0; i < 100; i += 1) {
     const now = Date.now();
     users.push({
-      createdDateTime: now,
+      created: now,
       emailAddress: faker.internet.email(),
       id: faker.random.uuid(),
       isArchived: faker.random.boolean(),
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      updatedDateTime: now
+      updated: now
     });
   }
 
@@ -21,13 +21,13 @@ module.exports = () => {
     const now = Date.now();
     companies.push({
       address: `${faker.address.streetAddress()} ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
-      createdDateTime: now,
+      created: now,
       id: faker.random.uuid(),
       isArchived: faker.random.boolean(),
       name: faker.company.companyName(),
       numEmployees: 0,
       phone: faker.phone.phoneNumber(),
-      updatedDateTime: now
+      updated: now
     });
   }
 
@@ -41,14 +41,14 @@ module.exports = () => {
       const isArchived = faker.random.boolean();
       employees.push({
         companyId,
-        createdDateTime: now,
+        created: now,
         emailAddress: faker.internet.email(),
         id: faker.random.uuid(),
         isAdmin: faker.random.boolean(),
         isArchived,
         jobTitle: faker.name.jobTitle(),
         phone: faker.phone.phoneNumber(),
-        updatedDateTime: now,
+        updated: now,
         userId
       });
       if (!isArchived) {

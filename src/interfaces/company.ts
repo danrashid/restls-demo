@@ -3,8 +3,8 @@ export interface ICompany {
   readonly name: string;
   readonly address: string;
   readonly phone: string;
-  readonly createdDateTime: number;
-  readonly updatedDateTime: number;
+  readonly created: number;
+  readonly updated: number;
   readonly isArchived: boolean;
   numEmployees: number;
 }

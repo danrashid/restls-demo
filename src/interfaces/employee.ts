@@ -6,7 +6,7 @@ export interface IEmployee {
   readonly emailAddress: string;
   readonly jobTitle: string;
   readonly isAdmin: boolean;
-  readonly createdDateTime: number;
-  readonly updatedDateTime: number;
+  readonly created: number;
+  readonly updated: number;
   readonly isArchived: boolean;
 }
