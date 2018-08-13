@@ -11,7 +11,6 @@
     }
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.3",
     "axios": "^0.18.0",
     "faker": "^4.1.0",
     "react": "^16.4.2",
@@ -23,8 +22,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
-    "restls": "^3.0.2",
-    "typeface-roboto": "^0.0.54"
+    "restls": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",

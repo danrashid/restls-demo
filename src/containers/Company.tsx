@@ -2,7 +2,7 @@ import * as React from 'react';
 import Company from '../components/Company';
 import Error from '../components/Error';
 import Spinner from '../components/Spinner';
-import { Action, fetchCompanyIfNeeded } from '../actions/company';
+import { Action, fetchCompanyIfNeeded } from '../actions/fetchCompany';
 import { connect } from 'react-redux';
 import { RootState } from '../reducers';
 import { ThunkDispatch } from 'redux-thunk';

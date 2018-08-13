@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
 import { IEmployee } from '../interfaces/employee';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +7,7 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
   companyId
 }) => (
   <div>
-    <Typography>Employees</Typography>
+    <h1>Employees</h1>
     <ul>
       {employees.map(({ id, user: { name } }) => (
         <li key={id}>
