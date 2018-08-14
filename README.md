@@ -2,6 +2,10 @@
 
 A working demo of [restls](https://github.com/danrashid/restls)
 
+### Start the SPA with WebpackDevServer
+
+`yarn start`
+
 ### Serve fake data on localhost:4000
 
 `yarn json-server`

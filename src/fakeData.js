@@ -28,7 +28,7 @@ module.exports = () => {
   for (let i = 0; i < 100; i += 1) {
     const now = Date.now();
     companies.push({
-      address: `${faker.address.streetAddress()} ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
+      address: `${faker.address.streetAddress()}\n${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
       created: now,
       id: faker.random.uuid(),
       isArchived: faker.random.boolean(),

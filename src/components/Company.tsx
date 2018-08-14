@@ -29,7 +29,11 @@ const Company: React.SFC<{ company: ICompany }> = ({
     </h3>
     <dl>
       <dt>Address</dt>
-      <dd>{address}</dd>
+      <dd>
+        {address.split("\n").map((line, i) => (
+          <div key={i}>{line}</div>
+        ))}
+      </dd>
       <dt>Phone</dt>
       <dd>
         <a href="tel:{phone}">{phone}</a>
