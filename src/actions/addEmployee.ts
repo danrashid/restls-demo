@@ -1,11 +1,13 @@
 import * as types from '../reducers/employee';
 import axios, { AxiosError } from 'axios';
-import { employees } from '../interfaces/collections';
+import { companies, employees } from '../interfaces/collections';
+import { GET, POST, PUT } from 'restls';
 import { History } from 'history';
+import { ICompany } from '../interfaces/company';
 import { IEmployeePayload } from '../interfaces/employee';
-import { POST } from 'restls';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
+import { updateCompanySuccess } from '../actions/updateCompany';
 
 export const addEmployeeRequest = () => ({
   type: types.ADD_EMPLOYEE_REQUEST as typeof types.ADD_EMPLOYEE_REQUEST
@@ -28,7 +30,7 @@ export const addEmployee = (
   Promise<IEmployeePayload>,
   RootState,
   null,
-  Action
+  Action | ReturnType<typeof updateCompanySuccess>
 > => dispatch => {
   return new Promise<IEmployeePayload>(async (resolve, reject) => {
     try {
@@ -47,10 +49,17 @@ export const addEmployee = (
           ? await POST<IEmployeePayload>(employees, payload, true, 750)
           : await axios.post<IEmployeePayload>(`/api/employees`, payload);
       const newEmployee = response.data;
+      const { id: employeeId, companyId } = newEmployee;
+
+      if (process.env.REACT_APP_MODE === "demo") {
+        const company = await GET<ICompany>(companies, companyId);
+        ++company.data.numEmployees;
+        await PUT<ICompany>(companies, company.data);
+        dispatch(updateCompanySuccess(company.data));
+      }
 
       dispatch(addEmployeeSuccess(newEmployee));
 
-      const { id: employeeId, companyId } = newEmployee;
       history.push(`/companies/${companyId}/employees/${employeeId}`);
 
       resolve(newEmployee);

@@ -1,11 +1,13 @@
 import * as types from '../reducers/employee';
 import axios, { AxiosError } from 'axios';
-import { employees } from '../interfaces/collections';
+import { companies, employees } from '../interfaces/collections';
+import { GET, PUT } from 'restls';
 import { History } from 'history';
+import { ICompany } from '../interfaces/company';
 import { IEmployeePayload } from '../interfaces/employee';
-import { PUT } from 'restls';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
+import { updateCompanySuccess } from '../actions/updateCompany';
 
 export const updateEmployeeRequest = () => ({
   type: types.UPDATE_EMPLOYEE_REQUEST as typeof types.UPDATE_EMPLOYEE_REQUEST
@@ -28,16 +30,31 @@ export const updateEmployee = (
   Promise<IEmployeePayload>,
   RootState,
   null,
-  Action
+  Action | ReturnType<typeof updateCompanySuccess>
 > => dispatch => {
   return new Promise<IEmployeePayload>(async (resolve, reject) => {
     try {
       dispatch(updateEmployeeRequest());
 
+      const { id: employeeId, companyId } = employee;
       const payload = {
         ...employee,
         updated: Date.now()
       };
+
+      if (process.env.REACT_APP_MODE === "demo") {
+        const oldEmployee = await GET<IEmployeePayload>(employees, employeeId);
+        if (oldEmployee.data.isArchived !== employee.isArchived) {
+          const company = await GET<ICompany>(companies, companyId);
+          if (employee.isArchived) {
+            --company.data.numEmployees;
+          } else {
+            ++company.data.numEmployees;
+          }
+          await PUT<ICompany>(companies, company.data);
+          dispatch(updateCompanySuccess(company.data));
+        }
+      }
 
       const response =
         process.env.REACT_APP_MODE === "demo"
@@ -49,7 +66,6 @@ export const updateEmployee = (
 
       dispatch(updateEmployeeSuccess(response.data));
 
-      const { id: employeeId, companyId } = response.data;
       history.push(`/companies/${companyId}/employees/${employeeId}`);
 
       resolve(response.data);
