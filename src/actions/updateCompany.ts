@@ -1,7 +1,9 @@
 import * as types from '../reducers/company';
 import axios, { AxiosError } from 'axios';
+import { companies } from '../interfaces/collections';
 import { History } from 'history';
 import { ICompany } from '../interfaces/company';
+import { PUT } from 'restls';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
 
@@ -27,13 +29,15 @@ export const updateCompany = (
     try {
       dispatch(updateCompanyRequest());
 
-      const response = await axios.put<ICompany>(
-        `/api/companies/${company.id}`,
-        {
-          ...company,
-          updated: Date.now()
-        }
-      );
+      const payload = {
+        ...company,
+        updated: Date.now()
+      };
+
+      const response =
+        process.env.REACT_APP_MODE === "demo"
+          ? await PUT<ICompany>(companies, payload, true, 750)
+          : await axios.put<ICompany>(`/api/companies/${company.id}`, payload);
 
       dispatch(updateCompanySuccess(response.data));
 

@@ -1,5 +1,7 @@
 import * as types from '../reducers/company';
 import axios, { AxiosError } from 'axios';
+import { companies } from '../interfaces/collections';
+import { GET } from 'restls';
 import { ICompany } from '../interfaces/company';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
@@ -27,7 +29,10 @@ const fetchCompany = (
   try {
     dispatch(fetchCompanyRequest());
 
-    const response = await axios.get<ICompany>(`/api/companies/${id}`);
+    const response =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GET<ICompany>(companies, id, true, 750)
+        : await axios.get<ICompany>(`/api/companies/${id}`);
 
     dispatch(fetchCompanySuccess(response.data));
   } catch (error) {

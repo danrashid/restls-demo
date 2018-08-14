@@ -1,8 +1,10 @@
 import * as types from '../reducers/user';
 import axios, { AxiosError } from 'axios';
+import { GET } from 'restls';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
+import { users } from '../interfaces/collections';
 
 const fetchUserRequest = () => ({
   type: types.FETCH_USER_REQUEST as typeof types.FETCH_USER_REQUEST
@@ -26,7 +28,10 @@ const fetchUser = (
   try {
     dispatch(fetchUserRequest());
 
-    const response = await axios.get<IUser>(`/api/users/${userId}`);
+    const response =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GET<IUser>(users, userId, true, 750)
+        : await axios.get<IUser>(`/api/users/${userId}`);
 
     dispatch(fetchUserSuccess(response.data));
   } catch (error) {

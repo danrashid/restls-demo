@@ -1,5 +1,7 @@
 import * as types from '../reducers/employee';
 import axios, { AxiosError } from 'axios';
+import { employees, users } from '../interfaces/collections';
+import { GET } from 'restls';
 import { IEmployee } from '../interfaces/employee';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
@@ -28,13 +30,20 @@ const fetchEmployee = (
   try {
     dispatch(fetchEmployeeRequest());
 
-    const employee = await axios.get<IEmployee>(`/api/employees/${id}`);
-    const user = await axios.get<IUser>(`/api/users/${employee.data.userId}`);
+    const employeeResponse =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GET<IEmployee>(employees, id, true, 750)
+        : await axios.get<IEmployee>(`/api/employees/${id}`);
+
+    const userResponse =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GET<IUser>(users, employeeResponse.data.userId, true, 750)
+        : await axios.get<IUser>(`/api/users/${employeeResponse.data.userId}`);
 
     dispatch(
       fetchEmployeeSuccess({
-        ...employee.data,
-        user: user.data
+        ...employeeResponse.data,
+        user: userResponse.data
       })
     );
   } catch (error) {

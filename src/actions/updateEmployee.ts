@@ -1,7 +1,9 @@
 import * as types from '../reducers/employee';
 import axios, { AxiosError } from 'axios';
+import { employees } from '../interfaces/collections';
 import { History } from 'history';
 import { IEmployeePayload } from '../interfaces/employee';
+import { PUT } from 'restls';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
 
@@ -32,13 +34,18 @@ export const updateEmployee = (
     try {
       dispatch(updateEmployeeRequest());
 
-      const response = await axios.put<IEmployeePayload>(
-        `/api/employees/${employee.id}`,
-        {
-          ...employee,
-          updated: Date.now()
-        }
-      );
+      const payload = {
+        ...employee,
+        updated: Date.now()
+      };
+
+      const response =
+        process.env.REACT_APP_MODE === "demo"
+          ? await PUT<IEmployeePayload>(employees, payload, true, 750)
+          : await axios.put<IEmployeePayload>(
+              `/api/employees/${employee.id}`,
+              payload
+            );
 
       dispatch(updateEmployeeSuccess(response.data));
 

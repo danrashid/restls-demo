@@ -1,8 +1,10 @@
 import * as types from '../reducers/users';
 import axios, { AxiosError } from 'axios';
+import { GETS } from 'restls';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
+import { users } from '../interfaces/collections';
 
 const fetchUsersRequest = () => ({
   type: types.FETCH_USERS_REQUEST as typeof types.FETCH_USERS_REQUEST
@@ -29,7 +31,10 @@ const fetchUsers = (): ThunkAction<
   try {
     dispatch(fetchUsersRequest());
 
-    const response = await axios.get<IUser[]>("/api/users?isArchived=false");
+    const response =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GETS<IUser>(users, undefined, true, 750)
+        : await axios.get<IUser[]>("/api/users?isArchived=false");
 
     dispatch(fetchUsersSuccess(response.data));
   } catch (error) {

@@ -1,7 +1,9 @@
 import * as types from '../reducers/company';
 import axios, { AxiosError } from 'axios';
+import { companies } from '../interfaces/collections';
 import { History } from 'history';
 import { ICompany } from '../interfaces/company';
+import { POST } from 'restls';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
 
@@ -28,13 +30,18 @@ export const addCompany = (
       dispatch(addCompanyRequest());
 
       const now = Date.now();
-      const response = await axios.post<ICompany>(`/api/companies`, {
+      const payload = {
         ...company,
         created: now,
         updated: now,
         isArchived: false,
         numEmployees: 0
-      });
+      };
+
+      const response =
+        process.env.REACT_APP_MODE === "demo"
+          ? await POST<ICompany>(companies, payload, true, 750)
+          : await axios.post<ICompany>(`/api/companies`, payload);
       const newCompany = response.data;
 
       dispatch(addCompanySuccess(newCompany));

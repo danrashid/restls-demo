@@ -1,5 +1,7 @@
 import * as types from '../reducers/employees';
 import axios, { AxiosError } from 'axios';
+import { employees, users } from '../interfaces/collections';
+import { GETS } from 'restls';
 import { IEmployee, IEmployeePayload } from '../interfaces/employee';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
@@ -28,20 +30,38 @@ const fetchEmployees = (
   try {
     dispatch(fetchEmployeesRequest());
 
-    const employees = await axios.get<IEmployeePayload[]>(
-      `/api/employees?companyId=${companyId}&isArchived=false`
-    );
-    const users = await axios.all(
-      employees.data.map(({ userId }) =>
-        axios.get<IUser>(`/api/users/${userId}`)
-      )
-    );
+    const employeesResponse =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GETS<IEmployeePayload>(
+            employees,
+            e => e.companyId === companyId,
+            true,
+            750
+          )
+        : await axios.get<IEmployeePayload[]>(
+            `/api/employees?companyId=${companyId}&isArchived=false`
+          );
+
+    const usersResponse =
+      process.env.REACT_APP_MODE === "demo"
+        ? await GETS<IUser>(
+            users,
+            ({ id }) =>
+              employeesResponse.data.map(e => e.userId).indexOf(id) > -1,
+            true,
+            750
+          )
+        : await axios.get<IUser[]>(
+            `/api/users?${employeesResponse.data
+              .map(({ userId }) => `id=${userId}`)
+              .join("&")}`
+          );
 
     dispatch(
       fetchEmployeesSuccess(
-        employees.data.map((e, i) => ({
+        employeesResponse.data.map((e, i) => ({
           ...e,
-          user: users[i].data
+          user: usersResponse.data.find(({ id }) => id === e.userId)!
         }))
       )
     );
