@@ -34,7 +34,7 @@ const fetchEmployees = (
       process.env.REACT_APP_MODE === "demo"
         ? await GETS<IEmployeePayload>(
             employees,
-            e => e.companyId === companyId,
+            e => e.companyId === companyId && !e.isArchived,
             true,
             750
           )

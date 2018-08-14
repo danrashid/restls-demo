@@ -34,7 +34,7 @@ const fetchCompanies = (): ThunkAction<
 
     const response =
       process.env.REACT_APP_MODE === "demo"
-        ? await GETS<ICompany>(companies, undefined, true, 750)
+        ? await GETS<ICompany>(companies, c => !c.isArchived, true, 750)
         : await axios.get<ICompany[]>("/api/companies?isArchived=false");
 
     dispatch(fetchCompaniesSuccess(response.data));

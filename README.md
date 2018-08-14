@@ -2,6 +2,10 @@
 
 A working demo of [restls](https://github.com/danrashid/restls)
 
+### Live demo using localStorage
+
+[http://restls-demo.danrashid.com](http://restls-demo.danrashid.com)
+
 ### Start the SPA using localStorage
 
 `REACT_APP_MODE=demo yarn start`
