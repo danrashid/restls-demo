@@ -22,42 +22,35 @@ if (process.env.REACT_APP_MODE === "demo") {
   seedData();
 }
 
-class App extends React.Component {
-  public render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Switch>
-            <Route
-              path="/companies/:companyId/employees/:employeeId/edit"
-              component={EditEmployee}
-            />
-            <Route
-              path="/companies/:companyId/employees/add/:userId"
-              component={AddEmployeeStep2}
-            />
-            <Route
-              path="/companies/:companyId/employees/add"
-              component={AddEmployeeStep1}
-            />
-            <Route
-              path="/companies/:companyId/employees/:employeeId"
-              component={Employee}
-            />
-            <Route
-              path="/companies/:companyId/employees"
-              component={Employees}
-            />
-            <Route path="/companies/:companyId/edit" component={EditCompany} />
-            <Route path="/companies/add" component={AddCompany} />
-            <Route path="/companies/:companyId" component={Company} />
-            <Route path="/companies" component={Companies} />
-            <Redirect from="/" to="/companies" />
-          </Switch>
-        </Router>
-      </Provider>
-    );
-  }
-}
+const App: React.SFC = () => (
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route
+          path="/companies/:companyId/employees/:employeeId/edit"
+          component={EditEmployee}
+        />
+        <Route
+          path="/companies/:companyId/employees/add/:userId"
+          component={AddEmployeeStep2}
+        />
+        <Route
+          path="/companies/:companyId/employees/add"
+          component={AddEmployeeStep1}
+        />
+        <Route
+          path="/companies/:companyId/employees/:employeeId"
+          component={Employee}
+        />
+        <Route path="/companies/:companyId/employees" component={Employees} />
+        <Route path="/companies/:companyId/edit" component={EditCompany} />
+        <Route path="/companies/add" component={AddCompany} />
+        <Route path="/companies/:companyId" component={Company} />
+        <Route path="/companies" component={Companies} />
+        <Redirect from="/" to="/companies" />
+      </Switch>
+    </Router>
+  </Provider>
+);
 
 export default App;
