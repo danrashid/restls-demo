@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Header from './Header';
 import { IEmployee } from '../interfaces/employee';
 import { Link } from 'react-router-dom';
 
@@ -7,10 +8,14 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
   companyId
 }) => (
   <div>
-    <p style={{ float: "right", marginTop: "1em" }}>
-      <Link to={`/companies/${companyId}/employees/add`}>Add an Employee</Link>
-    </p>
-    <h1>Employees</h1>
+    <Header>
+      <h1>Employees</h1>
+      <p>
+        <Link to={`/companies/${companyId}/employees/add`}>
+          Add an Employee
+        </Link>
+      </p>
+    </Header>
     <ul>
       {employees.map(({ id, user: { name } }) => (
         <li key={id}>
