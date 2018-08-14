@@ -1,5 +1,5 @@
 import * as React from 'react';
 
-const Spinner: React.SFC = () => <div>Loading&hellip;</div>;
+const Spinner: React.SFC = () => <p>Loading&hellip;</p>;
 
 export default Spinner;

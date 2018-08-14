@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 const Error: React.SFC<{ error: AxiosError | Error }> = ({ error }) => (
   <div>
-    <h1>Error</h1>
+    <p>Error</p>
     <pre>{JSON.stringify(error, undefined, "  ")}</pre>
   </div>
 );
