@@ -28,51 +28,71 @@ const Employee: React.SFC<{ employee: IEmployee }> = ({
         <em>Archived</em>
       </p>
     )}
-    <h3>Work info</h3>
-    <dl>
-      <dt>Email address</dt>
-      <dd>
-        <a href={`mailto:${workEmailAdress}`}>{workEmailAdress}</a>
-      </dd>
-      <dt>Phone</dt>
-      <dd>
-        <a href={`tel:${workPhone}`}>{workPhone}</a>
-      </dd>
-      {jobTitle && (
-        <React.Fragment>
-          <dt>Job title</dt>
-          <dd>{jobTitle}</dd>
-        </React.Fragment>
-      )}
-      {comments && (
-        <React.Fragment>
-          <dt>Comments</dt>
-          <dd>{comments}</dd>
-        </React.Fragment>
-      )}
-      <dt>Profile created</dt>
-      <dd>{new Date(profileCreated).toLocaleString()}</dd>
-      <dt>Profile last updated</dt>
-      <dd>{new Date(updated).toLocaleString()}</dd>
-    </dl>
-    <h3>Personal Info</h3>
-    <dl>
-      <dt>Email address</dt>
-      <dd>
-        <a href={`mailto:${personalEmailAddress}`}>{personalEmailAddress}</a>
-      </dd>
-      <dt>Phone</dt>
-      <dd>
-        <a href={`tel:${personalPhone}`}>{personalPhone}</a>
-      </dd>
-      <dt>Account created</dt>
-      <dd>{new Date(accountCreated).toLocaleString()}</dd>
-    </dl>
-    <p>
-      <Link to={`/companies/${companyId}/employees/${id}/edit`}>
-        Edit Employee
-      </Link>
-    </p>
+    <div
+      style={{
+        display: "flex"
+      }}
+    >
+      <div
+        style={{
+          flexGrow: 1
+        }}
+      >
+        <h3>Work info</h3>
+        <dl>
+          <dt>Email address</dt>
+          <dd>
+            <a href={`mailto:${workEmailAdress}`}>{workEmailAdress}</a>
+          </dd>
+          <dt>Phone</dt>
+          <dd>
+            <a href={`tel:${workPhone}`}>{workPhone}</a>
+          </dd>
+          {jobTitle && (
+            <React.Fragment>
+              <dt>Job title</dt>
+              <dd>{jobTitle}</dd>
+            </React.Fragment>
+          )}
+          {comments && (
+            <React.Fragment>
+              <dt>Comments</dt>
+              <dd>{comments}</dd>
+            </React.Fragment>
+          )}
+          <dt>Profile created</dt>
+          <dd>{new Date(profileCreated).toLocaleString()}</dd>
+          <dt>Profile last updated</dt>
+          <dd>{new Date(updated).toLocaleString()}</dd>
+        </dl>
+        <p>
+          <Link to={`/companies/${companyId}/employees/${id}/edit`}>
+            Edit Employee
+          </Link>
+        </p>
+      </div>
+      <div
+        style={{
+          flexGrow: 1
+        }}
+      >
+        <h3>Personal Info</h3>
+        <dl>
+          <dt>Email address</dt>
+          <dd>
+            <a href={`mailto:${personalEmailAddress}`}>
+              {personalEmailAddress}
+            </a>
+          </dd>
+          <dt>Phone</dt>
+          <dd>
+            <a href={`tel:${personalPhone}`}>{personalPhone}</a>
+          </dd>
+          <dt>Account created</dt>
+          <dd>{new Date(accountCreated).toLocaleString()}</dd>
+        </dl>
+      </div>
+    </div>
   </div>
 );
 
