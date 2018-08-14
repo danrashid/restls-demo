@@ -1,5 +1,11 @@
 const faker = require("faker");
 
+const formatEmailAddress = value =>
+  value
+    .toLowerCase()
+    .replace(/[^\w\@\.]/g, "-")
+    .replace(/\-+/g, "-");
+
 module.exports = () => {
   const companies = [];
   const employees = [];
@@ -7,12 +13,13 @@ module.exports = () => {
 
   for (let i = 0; i < 100; i += 1) {
     const now = Date.now();
+    const name = `${faker.name.firstName()} ${faker.name.lastName()}`;
     users.push({
       created: now,
-      emailAddress: faker.internet.email(),
+      emailAddress: formatEmailAddress(`${name}@example.com`),
       id: faker.random.uuid(),
       isArchived: faker.random.boolean(),
-      name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      name,
       phone: faker.phone.phoneNumber(),
       updated: now
     });
@@ -33,8 +40,10 @@ module.exports = () => {
   }
 
   for (let i = 0; i < 1000; i += 1) {
-    const userId = faker.random.arrayElement(users.map(u => u.id));
-    const companyId = faker.random.arrayElement(companies.map(c => c.id));
+    const { id: userId, name: userName } = faker.random.arrayElement(users);
+    const { id: companyId, name: companyName } = faker.random.arrayElement(
+      companies
+    );
     if (
       !employees.some(e => e.userId === userId && e.companyId === companyId)
     ) {
@@ -43,7 +52,7 @@ module.exports = () => {
       employees.push({
         companyId,
         created: now,
-        emailAddress: faker.internet.email(),
+        emailAddress: formatEmailAddress(`${userName}@${companyName}.com`),
         id: faker.random.uuid(),
         isAdmin: faker.random.boolean(),
         isArchived,

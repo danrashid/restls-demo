@@ -10,7 +10,7 @@ import { IUser } from '../interfaces/user';
 import { required } from '../validators';
 
 type OwnProps = {
-  users?: IUser[];
+  user?: IUser;
 };
 
 type Props = InjectedFormProps<IEmployee, OwnProps> & OwnProps;
@@ -21,28 +21,19 @@ const EmployeeForm: React.SFC<Props> = ({
   pristine,
   submitting,
   initialValues,
-  users
+  user
 }) => (
   <Form onSubmit={handleSubmit}>
     <h1>{initialValues.id ? "Edit Employee" : "Add an Employee"}</h1>
-    {users && (
-      <p>
-        <label>
-          Select a User *<br />
-          <Field name="userId" component="select" validate={required}>
-            <option />
-            {users.map(({ id, name, emailAddress }) => (
-              <option key={id} value={id}>
-                {name} ({emailAddress})
-              </option>
-            ))}
-          </Field>
-        </label>
-      </p>
+    {user && (
+      <dl>
+        <dt>{user.name}</dt>
+        <dd>{user.emailAddress}</dd>
+      </dl>
     )}
     <p>
       <label>
-        Phone number *<br />
+        Work phone number *<br />
         <Field name="phone" component="input" validate={required} />
       </label>
     </p>

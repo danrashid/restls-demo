@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AddCompany from './containers/AddCompany';
-import AddEmployee from './containers/AddEmployee';
+import AddEmployeeStep1 from './containers/AddEmployeeStep1';
+import AddEmployeeStep2 from './containers/AddEmployeeStep2';
 import Companies from './containers/Companies';
 import Company from './containers/Company';
 import EditCompany from './containers/EditCompany';
@@ -32,8 +33,12 @@ class App extends React.Component {
               component={EditEmployee}
             />
             <Route
+              path="/companies/:companyId/employees/add/:userId"
+              component={AddEmployeeStep2}
+            />
+            <Route
               path="/companies/:companyId/employees/add"
-              component={AddEmployee}
+              component={AddEmployeeStep1}
             />
             <Route
               path="/companies/:companyId/employees/:employeeId"
