@@ -12,7 +12,8 @@ const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
   handleSubmit,
   invalid,
   pristine,
-  submitting
+  submitting,
+  initialValues
 }) => (
   <Form onSubmit={handleSubmit}>
     <h1>CompanyForm</h1>
@@ -34,6 +35,14 @@ const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
         <Field name="phone" component="input" validate={required} />
       </label>
     </p>
+    {initialValues && (
+      <p>
+        <label>
+          <Field name="isArchived" component="input" type="checkbox" />
+          Archive
+        </label>
+      </p>
+    )}
     <p>
       <button type="submit" disabled={invalid || pristine || submitting}>
         Submit
