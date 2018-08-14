@@ -2,13 +2,14 @@
 
 A working demo of [restls](https://github.com/danrashid/restls)
 
-### Start the SPA with WebpackDevServer
+### Start the SPA using localStorage
 
-`yarn start`
+`REACT_APP_MODE=demo yarn start`
 
-### Serve fake data on localhost:4000
+### Start the SPA using json-server
 
-`yarn json-server`
+`yarn json-server` in one terminal
+`yarn start` in another
 
 ***
 

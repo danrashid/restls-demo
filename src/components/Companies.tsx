@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Companies: React.SFC<{ companies: ICompany[] }> = ({ companies }) => (
   <div>
+    <p style={{ float: "right", marginTop: ".75em" }}>
+      <Link to="/companies/add">Add a Company</Link>
+    </p>
     <h1>Companies</h1>
     <ul>
       {companies.map(({ id, name }) => (
@@ -12,9 +15,6 @@ const Companies: React.SFC<{ companies: ICompany[] }> = ({ companies }) => (
         </li>
       ))}
     </ul>
-    <p>
-      <Link to="/companies/add">Add a Company</Link>
-    </p>
   </div>
 );
 

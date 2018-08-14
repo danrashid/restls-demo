@@ -7,6 +7,9 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
   companyId
 }) => (
   <div>
+    <p style={{ float: "right", marginTop: ".75em" }}>
+      <Link to={`/companies/${companyId}/employees/add`}>Add an Employee</Link>
+    </p>
     <h1>Employees</h1>
     <ul>
       {employees.map(({ id, user: { name } }) => (
@@ -15,9 +18,6 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
         </li>
       ))}
     </ul>
-    <p>
-      <Link to={`/companies/${companyId}/employees/add`}>Add an Employee</Link>
-    </p>
   </div>
 );
 
