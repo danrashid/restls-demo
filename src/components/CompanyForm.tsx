@@ -6,35 +6,38 @@ import {
   reduxForm
   } from 'redux-form';
 import { ICompany } from '../interfaces/company';
+import { required } from '../validators';
 
 const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
-  handleSubmit
+  handleSubmit,
+  invalid,
+  pristine,
+  submitting
 }) => (
   <Form onSubmit={handleSubmit}>
     <h1>CompanyForm</h1>
     <p>
       <label>
-        Name
-        <br />
-        <Field name="name" component="input" />
+        Name *<br />
+        <Field name="name" component="input" validate={required} />
       </label>
     </p>
     <p>
       <label>
-        Mailing address
-        <br />
-        <Field name="address" component="textarea" />
+        Mailing address *<br />
+        <Field name="address" component="textarea" validate={required} />
       </label>
     </p>
     <p>
       <label>
-        Phone number
-        <br />
-        <Field name="phone" component="input" />
+        Phone number *<br />
+        <Field name="phone" component="input" validate={required} />
       </label>
     </p>
     <p>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={invalid || pristine || submitting}>
+        Submit
+      </button>
     </p>
   </Form>
 );

@@ -27,7 +27,7 @@ export function reducer(state: State = initialState, action: Action): State {
     case FETCH_COMPANIES_SUCCESS:
       return {
         isFetching: false,
-        companies: action.payload,
+        companies: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
         error: null
       };
     case FETCH_COMPANIES_FAILURE:
