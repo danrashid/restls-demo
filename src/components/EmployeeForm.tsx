@@ -26,10 +26,13 @@ const EmployeeForm: React.SFC<Props> = ({
   <Form onSubmit={handleSubmit}>
     <h1>{initialValues.id ? "Edit Employee" : "Add an Employee"}</h1>
     {user && (
-      <dl>
-        <dt>{user.name}</dt>
-        <dd>{user.emailAddress}</dd>
-      </dl>
+      <h3>
+        {user.name}
+        <br />
+        <small>
+          <a href={`mailto:${user.emailAddress}`}>{user.emailAddress}</a>
+        </small>
+      </h3>
     )}
     <p>
       <label>

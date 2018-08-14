@@ -7,7 +7,7 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
   companyId
 }) => (
   <div>
-    <p style={{ float: "right", marginTop: ".75em" }}>
+    <p style={{ float: "right", marginTop: "1em" }}>
       <Link to={`/companies/${companyId}/employees/add`}>Add an Employee</Link>
     </p>
     <h1>Employees</h1>

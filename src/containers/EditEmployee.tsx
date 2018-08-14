@@ -51,7 +51,11 @@ class EditEmployeeContainer extends React.Component<Props> {
   render() {
     const { employee, isFetching, error } = this.props;
     return employee && !isFetching ? (
-      <EmployeeForm initialValues={employee} onSubmit={this.onSubmit} />
+      <EmployeeForm
+        initialValues={employee}
+        onSubmit={this.onSubmit}
+        user={employee.user}
+      />
     ) : error ? (
       <Error error={error} />
     ) : (
