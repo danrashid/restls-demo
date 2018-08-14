@@ -29,7 +29,10 @@ export const updateCompany = (
 
       const response = await axios.put<ICompany>(
         `/api/companies/${company.id}`,
-        company
+        {
+          ...company,
+          updated: Date.now()
+        }
       );
 
       dispatch(updateCompanySuccess(response.data));

@@ -49,7 +49,7 @@ class EmployeesContainer extends React.Component<Props> {
     return employees && !isFetching ? (
       <Employees employees={employees} companyId={companyId} />
     ) : error ? (
-      <Error />
+      <Error error={error} />
     ) : (
       <Spinner />
     );

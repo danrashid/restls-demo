@@ -2,7 +2,7 @@ import * as React from 'react';
 import Employee from '../components/Employee';
 import Error from '../components/Error';
 import Spinner from '../components/Spinner';
-import { Action, fetchEmployeeIfNeeded } from '../actions/employee';
+import { Action, fetchEmployeeIfNeeded } from '../actions/fetchEmployee';
 import { connect } from 'react-redux';
 import { RootState } from '../reducers';
 import { ThunkDispatch } from 'redux-thunk';
@@ -42,7 +42,7 @@ class EmployeeContainer extends React.Component<Props> {
     return employee && !isFetching ? (
       <Employee employee={employee} />
     ) : error ? (
-      <Error />
+      <Error error={error} />
     ) : (
       <Spinner />
     );

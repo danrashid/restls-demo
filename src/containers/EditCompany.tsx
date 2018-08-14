@@ -52,7 +52,7 @@ class EditCompanyContainer extends React.Component<Props> {
     return company && !isFetching ? (
       <CompanyForm initialValues={company} onSubmit={this.onSubmit} />
     ) : error ? (
-      <Error />
+      <Error error={error} />
     ) : (
       <Spinner />
     );

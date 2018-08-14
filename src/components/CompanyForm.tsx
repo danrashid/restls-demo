@@ -16,7 +16,7 @@ const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
   initialValues
 }) => (
   <Form onSubmit={handleSubmit}>
-    <h1>CompanyForm</h1>
+    <h1>{initialValues ? "Edit Company" : "Add a Company"}</h1>
     <p>
       <label>
         Name *<br />
@@ -39,13 +39,13 @@ const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
       <p>
         <label>
           <Field name="isArchived" component="input" type="checkbox" />
-          Archive
+          Archived
         </label>
       </p>
     )}
     <p>
       <button type="submit" disabled={invalid || pristine || submitting}>
-        Submit
+        Save Company
       </button>
     </p>
   </Form>

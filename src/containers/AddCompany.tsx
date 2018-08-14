@@ -21,7 +21,7 @@ const mapDispatchToProps = (
     dispatch(addCompany(companyForm, history))
 });
 
-class EditCompanyContainer extends React.Component<Props> {
+class AddCompanyContainer extends React.Component<Props> {
   onSubmit = async (companyForm: ICompany) =>
     await this.props.addCompany(companyForm);
 
@@ -33,4 +33,4 @@ class EditCompanyContainer extends React.Component<Props> {
 export default connect(
   undefined,
   mapDispatchToProps
-)(EditCompanyContainer);
+)(AddCompanyContainer);

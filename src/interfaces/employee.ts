@@ -6,7 +6,8 @@ export interface IEmployeePayload {
   readonly companyId: string;
   readonly phone: string;
   readonly emailAddress: string;
-  readonly jobTitle: string;
+  readonly jobTitle?: string;
+  readonly comments?: string;
   readonly isAdmin: boolean;
   readonly created: number;
   readonly updated: number;

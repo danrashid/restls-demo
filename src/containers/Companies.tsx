@@ -28,7 +28,7 @@ class CompaniesContainer extends React.Component<Props> {
     return companies && !isFetching ? (
       <Companies companies={companies} />
     ) : error ? (
-      <Error />
+      <Error error={error} />
     ) : (
       <Spinner />
     );

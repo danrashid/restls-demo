@@ -15,6 +15,9 @@ const Employees: React.SFC<{ employees: IEmployee[]; companyId: string }> = ({
         </li>
       ))}
     </ul>
+    <p>
+      <Link to={`/companies/${companyId}/employees/add`}>Add an Employee</Link>
+    </p>
   </div>
 );
 

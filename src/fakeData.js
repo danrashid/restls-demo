@@ -13,6 +13,7 @@ module.exports = () => {
       id: faker.random.uuid(),
       isArchived: faker.random.boolean(),
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      phone: faker.phone.phoneNumber(),
       updated: now
     });
   }
