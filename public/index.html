@@ -42,7 +42,7 @@
     body {
       background: black;
       margin: 0;
-      padding: 1em 2em;
+      padding: 0 5%;
     }
 
     body,
@@ -99,11 +99,23 @@
 
     input:not([type="checkbox"]),
     textarea {
-      width: 20em;
+      width: 25em;
+      max-width: 90%;
     }
 
     button {
       margin-top: 1em;
+      background: white;
+      color: #000;
+    }
+
+    button:not(:disabled):hover {
+      background: lightcyan;
+    }
+
+    button:disabled {
+      background: #ccc;
+      color: #666;
     }
   </style>
 </head>

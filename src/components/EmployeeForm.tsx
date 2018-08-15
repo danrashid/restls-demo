@@ -1,6 +1,7 @@
 import * as React from 'react';
+import Field from './Field';
 import {
-  Field,
+  Field as ReduxFormField,
   Form,
   InjectedFormProps,
   reduxForm
@@ -34,16 +35,11 @@ const EmployeeForm: React.SFC<Props> = ({
         </small>
       </h3>
     )}
-    <p>
-      <label>
-        Work phone number *<br />
-        <Field name="phone" component="input" validate={required} />
-      </label>
-    </p>
+    <Field label="Work phone number" name="phone" required />
     <p>
       <label>
         Work email address *<br />
-        <Field
+        <ReduxFormField
           name="emailAddress"
           component="input"
           type="email"
@@ -51,24 +47,12 @@ const EmployeeForm: React.SFC<Props> = ({
         />
       </label>
     </p>
-    <p>
-      <label>
-        Job Title
-        <br />
-        <Field name="jobTitle" component="input" />
-      </label>
-    </p>
-    <p>
-      <label>
-        Comments
-        <br />
-        <Field name="comments" component="textarea" />
-      </label>
-    </p>
+    <Field label="Job title" name="jobTitle" required />
+    <Field label="Comments" name="comments" component="textarea" />
     {initialValues.id && (
       <p>
         <label>
-          <Field name="isArchived" component="input" type="checkbox" />
+          <ReduxFormField name="isArchived" component="input" type="checkbox" />
           Archived
         </label>
       </p>

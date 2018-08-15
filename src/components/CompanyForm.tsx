@@ -1,12 +1,12 @@
 import * as React from 'react';
+import Field from './Field';
 import {
-  Field,
+  Field as ReduxFormField,
   Form,
   InjectedFormProps,
   reduxForm
   } from 'redux-form';
 import { ICompany } from '../interfaces/company';
-import { required } from '../validators';
 
 const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
   handleSubmit,
@@ -17,28 +17,18 @@ const CompanyForm: React.SFC<InjectedFormProps<ICompany>> = ({
 }) => (
   <Form onSubmit={handleSubmit}>
     <h1>{initialValues ? "Edit Company" : "Add a Company"}</h1>
-    <p>
-      <label>
-        Name *<br />
-        <Field name="name" component="input" validate={required} />
-      </label>
-    </p>
-    <p>
-      <label>
-        Mailing address *<br />
-        <Field name="address" component="textarea" validate={required} />
-      </label>
-    </p>
-    <p>
-      <label>
-        Phone number *<br />
-        <Field name="phone" component="input" validate={required} />
-      </label>
-    </p>
+    <Field label="Name" name="name" required />
+    <Field
+      label="Mailing address"
+      name="address"
+      component="textarea"
+      required
+    />
+    <Field label="Phone number" name="phone" required />
     {initialValues && (
       <p>
         <label>
-          <Field name="isArchived" component="input" type="checkbox" />
+          <ReduxFormField name="isArchived" component="input" type="checkbox" />
           Archived
         </label>
       </p>
