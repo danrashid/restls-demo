@@ -6,11 +6,11 @@ A working demo of [restls](https://github.com/danrashid/restls)
 
 [https://restls-demo.danrashid.com](https://restls-demo.danrashid.com)
 
-### Start the SPA using localStorage
+#### Start the SPA using localStorage
 
 `REACT_APP_MODE=demo yarn start`
 
-### Start the SPA using json-server
+#### Start the SPA using json-server
 
 `yarn json-server` in one terminal  
 `yarn start` in another
