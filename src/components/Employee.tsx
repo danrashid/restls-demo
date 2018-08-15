@@ -1,4 +1,5 @@
 import * as React from 'react';
+import UserIcon from './UserIcon';
 import { IEmployee } from '../interfaces/employee';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +23,10 @@ const Employee: React.SFC<{ employee: IEmployee }> = ({
   }
 }) => (
   <div>
-    <h1>{name}</h1>
+    <h1>
+      <UserIcon />
+      {name}
+    </h1>
     {isArchived && (
       <p>
         <em>Archived</em>
