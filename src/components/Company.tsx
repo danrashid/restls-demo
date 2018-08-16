@@ -41,7 +41,7 @@ const Company: React.SFC<{ company: ICompany }> = ({
       </dd>
       <dt>Phone</dt>
       <dd>
-        <a href="tel:{phone}">{phone}</a>
+        <a href={`tel:${phone}`}>{phone}</a>
       </dd>
       <dt>Created</dt>
       <dd>{new Date(created).toLocaleString()}</dd>
