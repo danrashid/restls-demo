@@ -27,8 +27,9 @@ const Company: React.SFC<{ company: ICompany }> = ({
     )}
     <h3>
       <Link to={`/companies/${id}/employees`}>
-        {numEmployees.toLocaleString()}{" "}
-        {numEmployees === 1 ? "Employee" : "Employees"}
+        {numEmployees === 1
+          ? "1 Employee"
+          : `${numEmployees.toLocaleString()} Employees`}
       </Link>
     </h3>
     <dl>
