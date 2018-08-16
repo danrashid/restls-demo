@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ProtocolAnchor from './ProtocolAnchor';
 import UserIcon from './UserIcon';
 import { IEmployee } from '../interfaces/employee';
 import { Link } from 'react-router-dom';
@@ -46,11 +47,11 @@ const Employee: React.SFC<{ employee: IEmployee }> = ({
         <dl>
           <dt>Email address</dt>
           <dd>
-            <a href={`mailto:${workEmailAdress}`}>{workEmailAdress}</a>
+            <ProtocolAnchor protocol="mailto" value={workEmailAdress} />
           </dd>
           <dt>Phone</dt>
           <dd>
-            <a href={`tel:${workPhone}`}>{workPhone}</a>
+            <ProtocolAnchor protocol="tel" value={workPhone} />
           </dd>
           {jobTitle && (
             <React.Fragment>
@@ -84,13 +85,11 @@ const Employee: React.SFC<{ employee: IEmployee }> = ({
         <dl>
           <dt>Email address</dt>
           <dd>
-            <a href={`mailto:${personalEmailAddress}`}>
-              {personalEmailAddress}
-            </a>
+            <ProtocolAnchor protocol="mailto" value={personalEmailAddress} />
           </dd>
           <dt>Phone</dt>
           <dd>
-            <a href={`tel:${personalPhone}`}>{personalPhone}</a>
+            <ProtocolAnchor protocol="tel" value={personalPhone} />
           </dd>
           <dt>Account created</dt>
           <dd>{new Date(accountCreated).toLocaleString()}</dd>

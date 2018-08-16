@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Field from './Field';
+import ProtocolAnchor from './ProtocolAnchor';
 import {
   Field as ReduxFormField,
   Form,
@@ -31,7 +32,7 @@ const EmployeeForm: React.SFC<Props> = ({
         {user.name}
         <br />
         <small>
-          <a href={`mailto:${user.emailAddress}`}>{user.emailAddress}</a>
+          <ProtocolAnchor protocol="mailto" value={user.emailAddress} />
         </small>
       </h3>
     )}

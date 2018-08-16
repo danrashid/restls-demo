@@ -1,5 +1,6 @@
 import * as React from 'react';
 import BuildingIcon from './BuildingIcon';
+import ProtocolAnchor from './ProtocolAnchor';
 import { ICompany } from '../interfaces/company';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +42,7 @@ const Company: React.SFC<{ company: ICompany }> = ({
       </dd>
       <dt>Phone</dt>
       <dd>
-        <a href={`tel:${phone}`}>{phone}</a>
+        <ProtocolAnchor protocol="tel" value={phone} />
       </dd>
       <dt>Created</dt>
       <dd>{new Date(created).toLocaleString()}</dd>
