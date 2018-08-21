@@ -1,7 +1,7 @@
 import * as types from '../reducers/employees';
 import axios, { AxiosError } from 'axios';
 import { employees, users } from '../interfaces/collections';
-import { GETS } from 'restls';
+import { GET } from 'restls';
 import { IEmployee, IEmployeePayload } from '../interfaces/employee';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
@@ -32,7 +32,7 @@ const fetchEmployees = (
 
     const employeesResponse =
       process.env.REACT_APP_MODE === "demo"
-        ? await GETS<IEmployeePayload>(
+        ? await GET<IEmployeePayload[]>(
             employees,
             e => e.companyId === companyId && !e.isArchived,
             true,
@@ -44,9 +44,9 @@ const fetchEmployees = (
 
     const usersResponse =
       process.env.REACT_APP_MODE === "demo"
-        ? await GETS<IUser>(
+        ? await GET<IUser[]>(
             users,
-            ({ id }) =>
+            ({ id }: IUser) =>
               employeesResponse.data.map(e => e.userId).indexOf(id) > -1,
             true,
             750
@@ -61,7 +61,7 @@ const fetchEmployees = (
       fetchEmployeesSuccess(
         employeesResponse.data.map((e, i) => ({
           ...e,
-          user: usersResponse.data.find(({ id }) => id === e.userId)!
+          user: usersResponse.data.find(({ id }: IUser) => id === e.userId)!
         }))
       )
     );

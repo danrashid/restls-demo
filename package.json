@@ -22,7 +22,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
-    "restls": "^3.0.2"
+    "restls": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",

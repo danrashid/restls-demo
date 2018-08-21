@@ -1,6 +1,6 @@
 import * as types from '../reducers/users';
 import axios, { AxiosError } from 'axios';
-import { GETS } from 'restls';
+import { GET } from 'restls';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
@@ -33,7 +33,7 @@ const fetchUsers = (): ThunkAction<
 
     const response =
       process.env.REACT_APP_MODE === "demo"
-        ? await GETS<IUser>(users, u => !u.isArchived, true, 750)
+        ? await GET<IUser[]>(users, (u: IUser) => !u.isArchived, true, 750)
         : await axios.get<IUser[]>("/api/users?isArchived=false");
 
     dispatch(fetchUsersSuccess(response.data));

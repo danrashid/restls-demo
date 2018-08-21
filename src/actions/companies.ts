@@ -1,7 +1,7 @@
 import * as types from '../reducers/companies';
 import axios, { AxiosError } from 'axios';
 import { companies } from '../interfaces/collections';
-import { GETS } from 'restls';
+import { GET } from 'restls';
 import { ICompany } from '../interfaces/company';
 import { RootState } from '../reducers';
 import { ThunkAction } from 'redux-thunk';
@@ -34,7 +34,12 @@ const fetchCompanies = (): ThunkAction<
 
     const response =
       process.env.REACT_APP_MODE === "demo"
-        ? await GETS<ICompany>(companies, c => !c.isArchived, true, 750)
+        ? await GET<ICompany[]>(
+            companies,
+            (c: ICompany) => !c.isArchived,
+            true,
+            750
+          )
         : await axios.get<ICompany[]>("/api/companies?isArchived=false");
 
     dispatch(fetchCompaniesSuccess(response.data));
